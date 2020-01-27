@@ -1,6 +1,10 @@
-import sys,os,xlrd
+import sys,os,xlrd,json
 from PyQt5.QtWidgets import *
 from scratchGUI import *
+
+class mydict(dict):
+        def __str__(self):
+            return json.dumps(self)
 
 class MyForm(QMainWindow,Ui_MainWindow):
 
@@ -10,6 +14,7 @@ class MyForm(QMainWindow,Ui_MainWindow):
         self.ui.setupUi(self)
         self.ui.btn_load_input.clicked.connect(self.loadInputs)
         self.ui.btn_validate.clicked.connect(self.validate)
+        self.ui.btn_submit.clicked.connect(self.submit)
         self.show()
     def dispMessage(self,text,informativeText,WindowTitle):
             msg = QMessageBox()
@@ -54,13 +59,32 @@ class MyForm(QMainWindow,Ui_MainWindow):
             
         return True            
 
+    def submit(self):
 
+        # pass
+        for sheet_name in self.sheet_names:
+            # print(sheet_name)
+            tablename=self.sheets_dict[sheet_name]['table_name']   
+            table = (self.findChild(QTableWidget,tablename))
+            allRows = table.rowCount()
+            # int flag=0;
+            tablecols=table.columnCount()
+            for i in range(allRows):
+                filename=sheet_name+'_'+table.item(i,0).text()+'.txt'
+                dicts = {}
+                for j in range(tablecols): 
+                    # print(i,j) 
+                    dicts[table.horizontalHeaderItem(j).text()] =table.item(i,j).text()
+                with open(filename, 'w') as file:
+
+                    file.write(json.dumps(dicts))    
+                # print(filename)
 
 
             
 
     def loadData(self,path):
-        self.wb = xlrd.open_workbook(path) # 
+        self.wb = xlrd.open_workbook(path) 
         self.sheet_names = self.wb.sheet_names()
         no_of_sheets=len(self.sheet_names)
         for i in range(no_of_sheets):
@@ -75,8 +99,11 @@ class MyForm(QMainWindow,Ui_MainWindow):
         table = (self.findChild(QTableWidget,tablename))          
         table.setRowCount(curr_sheet.nrows-1)
         for i in range(1,curr_sheet.nrows): 
-            for j in range(int(tablecols)): 
-                table.setItem(i-1,j,QTableWidgetItem(str(curr_sheet.cell_value(i,j))))
+            for j in range(int(tablecols)):
+                y=curr_sheet.cell_value(i,j)
+                if j==0:
+                    y=int(y)
+                table.setItem(i-1,j,QTableWidgetItem(str(y)))
 
     def loadInputs(self):
         fname = QFileDialog.getOpenFileName(self, 'Open file', '/home/makishere/fossee2020')
