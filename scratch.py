@@ -24,6 +24,7 @@ class MyForm(QMainWindow,Ui_MainWindow):
             msg.setWindowTitle(WindowTitle)
             msg.exec_()   
     def validate(self):
+
         tablenames=['table_fin','table_ten','table_bce','table_cleat']
         for sheet_name in self.sheet_names:
             tablename=self.sheets_dict[sheet_name]['table_name']
@@ -62,8 +63,14 @@ class MyForm(QMainWindow,Ui_MainWindow):
     def submit(self):
 
         # pass
+        cwd = os.getcwd()
         for sheet_name in self.sheet_names:
             # print(sheet_name)
+            path = os.path.join(cwd,sheet_name)
+            try:  
+                os.mkdir(path)  
+            except OSError as error:  
+                print(error)  
             tablename=self.sheets_dict[sheet_name]['table_name']   
             table = (self.findChild(QTableWidget,tablename))
             allRows = table.rowCount()
@@ -75,7 +82,7 @@ class MyForm(QMainWindow,Ui_MainWindow):
                 for j in range(tablecols): 
                     # print(i,j) 
                     dicts[table.horizontalHeaderItem(j).text()] =table.item(i,j).text()
-                with open(filename, 'w') as file:
+                with open(os.path.join(path,filename), 'w') as file:
 
                     file.write(json.dumps(dicts))    
                 # print(filename)
@@ -106,7 +113,7 @@ class MyForm(QMainWindow,Ui_MainWindow):
                 table.setItem(i-1,j,QTableWidgetItem(str(y)))
 
     def loadInputs(self):
-        fname = QFileDialog.getOpenFileName(self, 'Open file', '/home/makishere/fossee2020')
+        fname = QFileDialog.getOpenFileName(self, 'Open file', '/home/makishere/fossee2020',"CSV files (*.csv);;Excel files(*.xlsx)")
         extension = os.path.splitext(fname[0])[1]
         # print(fname[0])
         supportedFileTypes=['.csv','.xlsx']
