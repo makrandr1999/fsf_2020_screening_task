@@ -1,9 +1,7 @@
 import sys,os,xlrd,json,csv
 from PyQt5.QtWidgets import *
 from scratchGUI import *
-import openpyxl
-from openpyxl import Workbook
-from pathlib import Path
+
 
 
 class mydict(dict):
@@ -20,12 +18,14 @@ class MyForm(QMainWindow,Ui_MainWindow):
         self.ui.btn_validate.clicked.connect(self.validate)
         self.ui.btn_submit.clicked.connect(self.submit)
         self.show()
+    # A display message function to display a message box with an event description.    
     def dispMessage(self,text,informativeText,WindowTitle):
             msg = QMessageBox() 
             msg.setText(text)
             msg.setInformativeText(informativeText)
             msg.setWindowTitle(WindowTitle)
             msg.exec_()   
+    # A validate function to check if the inputs satisfy the given constraints.        
     def validate(self):
         try:
             tablenames=['table_fin','table_ten','table_bce','table_cleat']
@@ -44,7 +44,7 @@ class MyForm(QMainWindow,Ui_MainWindow):
             return True
         except AttributeError:
             self.dispMessage("Input File not loaded"," " ,"Error")
-
+    #The validateID function checks if all row IDs are unique. Returns false if two or more rows have the same ID value.        
     def validateID(self,tablename):
         table = (self.findChild(QTableWidget,tablename)) 
         allRows = table.rowCount()
@@ -57,7 +57,7 @@ class MyForm(QMainWindow,Ui_MainWindow):
             if x in s: return False
             s.add(x)
         return True
-
+    #The validateNumeric function checks if the table data is numeric in nature. Returns false if it finds a non-numeric value.   
     def validateNumeric(self,tablename):
         table = (self.findChild(QTableWidget,tablename))
         allRows = table.rowCount()
@@ -70,7 +70,7 @@ class MyForm(QMainWindow,Ui_MainWindow):
                     return False        
             
         return True            
-
+    # The submit button runs the validate check on the table data and generates JSONified text files of the row data.    
     def submit(self):
         if not self.validate():
             return
@@ -98,7 +98,7 @@ class MyForm(QMainWindow,Ui_MainWindow):
 
 
             
-
+    # The load functions prompt the user to select the input xlsx file and help load the spreadsheet data into corresponding sheets in the GUI.     
     def loadData(self,path):
         self.wb = xlrd.open_workbook(path) 
         self.sheet_names = self.wb.sheet_names()
@@ -128,10 +128,10 @@ class MyForm(QMainWindow,Ui_MainWindow):
     def loadInputs(self):
         try:
 
-            fname = QFileDialog.getOpenFileName(self, 'Open file', '/home/makishere/fossee2020',"Excel files(*.xlsx);;CSV files (*.csv)")
+            fname = QFileDialog.getOpenFileName(self, 'Open file', '/home',"Excel files(*.xlsx);;CSV files (*.csv)")
             extension = os.path.splitext(fname[0])[1]   
             if fname[0]:
-                self.loadData(Path(fname[0]))
+                self.loadData(fname[0])
         except Exception as e:
             self.dispMessage(str(e)," ", "Something went wrong!")    
                 
