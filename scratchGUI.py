@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'scratch.ui'
 #
-# Created by: PyQt5 UI code generator 5.14.1
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -24,32 +22,8 @@ class Ui_MainWindow(object):
         self.frame.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
-        self.gridLayout_4 = QtWidgets.QGridLayout(self.frame)
-        self.gridLayout_4.setObjectName("gridLayout_4")
-        self.frame_2 = QtWidgets.QFrame(self.frame)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
-        sizePolicy.setHorizontalStretch(1)
-        sizePolicy.setVerticalStretch(1)
-        sizePolicy.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
-        self.frame_2.setSizePolicy(sizePolicy)
-        self.frame_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.frame_2.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.frame_2.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.frame_2.setFrameShadow(QtWidgets.QFrame.Plain)
-        self.frame_2.setLineWidth(0)
-        self.frame_2.setObjectName("frame_2")
-        self.gridLayout = QtWidgets.QGridLayout(self.frame_2)
-        self.gridLayout.setObjectName("gridLayout")
-        self.btn_load_input = QtWidgets.QPushButton(self.frame_2)
-        self.btn_load_input.setObjectName("btn_load_input")
-        self.gridLayout.addWidget(self.btn_load_input, 0, 0, 1, 1)
-        self.btn_submit = QtWidgets.QPushButton(self.frame_2)
-        self.btn_submit.setObjectName("btn_submit")
-        self.gridLayout.addWidget(self.btn_submit, 0, 2, 1, 1)
-        self.btn_validate = QtWidgets.QPushButton(self.frame_2)
-        self.btn_validate.setObjectName("btn_validate")
-        self.gridLayout.addWidget(self.btn_validate, 0, 1, 1, 1)
-        self.gridLayout_4.addWidget(self.frame_2, 4, 0, 1, 1, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignBottom)
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.frame)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.tabWidget = QtWidgets.QTabWidget(self.frame)
         self.tabWidget.setObjectName("tabWidget")
         self.tab_fin = QtWidgets.QWidget()
@@ -78,12 +52,13 @@ class Ui_MainWindow(object):
         self.table_fin.horizontalHeader().setCascadingSectionResizes(True)
         self.table_fin.horizontalHeader().setDefaultSectionSize(120)
         self.table_fin.horizontalHeader().setStretchLastSection(True)
+        self.table_fin.verticalHeader().setDefaultSectionSize(40)
         self.verticalLayout_2.addWidget(self.table_fin)
         self.tabWidget.addTab(self.tab_fin, "")
         self.tab_ten = QtWidgets.QWidget()
         self.tab_ten.setObjectName("tab_ten")
-        self.gridLayout_3 = QtWidgets.QGridLayout(self.tab_ten)
-        self.gridLayout_3.setObjectName("gridLayout_3")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.tab_ten)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.table_ten = QtWidgets.QTableWidget(self.tab_ten)
         self.table_ten.setObjectName("table_ten")
         self.table_ten.setColumnCount(5)
@@ -99,7 +74,9 @@ class Ui_MainWindow(object):
         item = QtWidgets.QTableWidgetItem()
         self.table_ten.setHorizontalHeaderItem(4, item)
         self.table_ten.horizontalHeader().setDefaultSectionSize(150)
-        self.gridLayout_3.addWidget(self.table_ten, 0, 0, 1, 1)
+        self.table_ten.horizontalHeader().setStretchLastSection(True)
+        self.table_ten.verticalHeader().setCascadingSectionResizes(True)
+        self.verticalLayout_6.addWidget(self.table_ten)
         self.tabWidget.addTab(self.tab_ten, "")
         self.tab_bce = QtWidgets.QWidget()
         self.tab_bce.setObjectName("tab_bce")
@@ -125,6 +102,7 @@ class Ui_MainWindow(object):
         self.table_bce.setHorizontalHeaderItem(6, item)
         item = QtWidgets.QTableWidgetItem()
         self.table_bce.setHorizontalHeaderItem(7, item)
+        self.table_bce.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout_4.addWidget(self.table_bce)
         self.tabWidget.addTab(self.tab_bce, "")
         self.tab_cleat = QtWidgets.QWidget()
@@ -132,6 +110,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.tab_cleat)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.table_cleat = QtWidgets.QTableWidget(self.tab_cleat)
+        self.table_cleat.setGridStyle(QtCore.Qt.SolidLine)
         self.table_cleat.setObjectName("table_cleat")
         self.table_cleat.setColumnCount(7)
         self.table_cleat.setRowCount(0)
@@ -149,9 +128,29 @@ class Ui_MainWindow(object):
         self.table_cleat.setHorizontalHeaderItem(5, item)
         item = QtWidgets.QTableWidgetItem()
         self.table_cleat.setHorizontalHeaderItem(6, item)
+        self.table_cleat.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout_5.addWidget(self.table_cleat)
         self.tabWidget.addTab(self.tab_cleat, "")
-        self.gridLayout_4.addWidget(self.tabWidget, 3, 0, 1, 1)
+        self.verticalLayout_3.addWidget(self.tabWidget)
+        self.frame_2 = QtWidgets.QFrame(self.frame)
+        self.frame_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.frame_2.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.frame_2.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.frame_2.setLineWidth(0)
+        self.frame_2.setObjectName("frame_2")
+        self.gridLayout = QtWidgets.QGridLayout(self.frame_2)
+        self.gridLayout.setObjectName("gridLayout")
+        self.btn_load_input = QtWidgets.QPushButton(self.frame_2)
+        self.btn_load_input.setObjectName("btn_load_input")
+        self.gridLayout.addWidget(self.btn_load_input, 0, 0, 1, 1)
+        self.btn_validate = QtWidgets.QPushButton(self.frame_2)
+        self.btn_validate.setObjectName("btn_validate")
+        self.gridLayout.addWidget(self.btn_validate, 0, 1, 1, 1)
+        self.btn_submit = QtWidgets.QPushButton(self.frame_2)
+        self.btn_submit.setObjectName("btn_submit")
+        self.gridLayout.addWidget(self.btn_submit, 0, 2, 1, 1)
+        self.verticalLayout_3.addWidget(self.frame_2)
         self.gridLayout_2.addWidget(self.frame, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -159,15 +158,12 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(3)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.btn_load_input.setText(_translate("MainWindow", "Load Inputs"))
-        self.btn_submit.setText(_translate("MainWindow", "Submit"))
-        self.btn_validate.setText(_translate("MainWindow", "Validate"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Scratch"))
         item = self.table_fin.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "ID"))
         item = self.table_fin.horizontalHeaderItem(1)
@@ -226,6 +222,9 @@ class Ui_MainWindow(object):
         item = self.table_cleat.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "Bolt grade"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_cleat), _translate("MainWindow", "CleatAngle"))
+        self.btn_load_input.setText(_translate("MainWindow", "Load Inputs"))
+        self.btn_validate.setText(_translate("MainWindow", "Validate"))
+        self.btn_submit.setText(_translate("MainWindow", "Submit"))
 
 
 if __name__ == "__main__":
@@ -236,3 +235,4 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
