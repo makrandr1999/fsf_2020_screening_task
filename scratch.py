@@ -1,6 +1,10 @@
-import sys,os,xlrd,json
+import sys,os,xlrd,json,csv
 from PyQt5.QtWidgets import *
 from scratchGUI import *
+import openpyxl
+from openpyxl import Workbook
+from pathlib import Path
+
 
 class mydict(dict):
         def __str__(self):
@@ -85,8 +89,10 @@ class MyForm(QMainWindow,Ui_MainWindow):
                     for j in range(tablecols): 
                         dicts[table.horizontalHeaderItem(j).text()] =table.item(i,j).text()
                     with open(os.path.join(path,filename), 'w') as file:
+                        file.write(json.dumps(dicts))
+            self.dispMessage("Successfully generated the text files!"," ","Success!")    
+                            
 
-                        file.write(json.dumps(dicts))   
         except Exception as e:
             self.dispMessage(str(e)," ", "Something went wrong!")                 
 
@@ -123,9 +129,9 @@ class MyForm(QMainWindow,Ui_MainWindow):
         try:
 
             fname = QFileDialog.getOpenFileName(self, 'Open file', '/home/makishere/fossee2020',"Excel files(*.xlsx);;CSV files (*.csv)")
-            extension = os.path.splitext(fname[0])[1]
+            extension = os.path.splitext(fname[0])[1]   
             if fname[0]:
-                self.loadData(fname[0])
+                self.loadData(Path(fname[0]))
         except Exception as e:
             self.dispMessage(str(e)," ", "Something went wrong!")    
                 
