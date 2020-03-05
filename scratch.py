@@ -89,7 +89,7 @@ class MyForm(QMainWindow,Ui_MainWindow):
                     for j in range(tablecols): 
                         dicts[table.horizontalHeaderItem(j).text()] =table.item(i,j).text()
                     with open(os.path.join(path,filename), 'w') as file:
-                        file.write(json.dumps(dicts))
+                        file.write(json.dumps(dicts).strip('{}'))
             self.dispMessage("Successfully generated the text files!"," ","Success!")    
                             
 
